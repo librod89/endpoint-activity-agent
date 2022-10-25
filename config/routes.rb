@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   delete :files, to: 'files#destroy'
 
   post :process, to: 'processes#start'
+
+  post :network, to: 'networks#post'
 end
