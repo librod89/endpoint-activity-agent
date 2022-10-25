@@ -1,4 +1,7 @@
 class FilesController < ApplicationController
+  before_action :start_time
+  after_action :log
+
   def create
     return unless path.present?
 
@@ -27,5 +30,20 @@ class FilesController < ApplicationController
 
   def path
     @path ||= params[:path]
+  end
+
+  def log
+    return unless path.present?
+
+    write_to_log([
+      "File creation/modification/deletion",
+      start_time,
+      path,
+      params[:action],
+      username[1],
+      $PROGRAM_NAME,
+      command[1],
+      Process.pid,
+    ])
   end
 end

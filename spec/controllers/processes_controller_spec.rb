@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe ProcessesController do
+  before do
+    allow(subject).to receive(:write_to_log)
+  end
+
   context '#start' do
     it 'does not call exec if the path param is empty' do
       expect(subject).not_to receive(:fork)
@@ -13,7 +17,7 @@ describe ProcessesController do
 
       it 'calls exec with expected path but no args' do
         expect(subject).to receive(:fork).and_yield do |block|
-          expect(block).to receive(:exec).with('open', path, '')
+          expect(block).to receive(:exec).with(OS.open_file_command, path, '')
         end
 
         post :start, params: { path: path }
@@ -24,7 +28,7 @@ describe ProcessesController do
 
         it 'calls exec with expected args' do
           expect(subject).to receive(:fork).and_yield do |block|
-            expect(block).to receive(:exec).with('open', path, args)
+            expect(block).to receive(:exec).with(OS.open_file_command, path, args)
           end
 
           post :start, params: { path: path, args: args }

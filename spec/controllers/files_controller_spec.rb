@@ -3,6 +3,10 @@ require 'rails_helper'
 describe FilesController do
   let(:path) { Faker::File.file_name(dir: Rails.root.join('tmp', 'files')) }
 
+  before do
+    allow(subject).to receive(:write_to_log)
+  end
+
   context '#create' do
     it 'does not create file if the path param is empty' do
       expect(FileUtils).not_to receive(:touch)

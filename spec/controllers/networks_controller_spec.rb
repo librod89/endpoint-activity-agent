@@ -7,6 +7,7 @@ describe NetworksController do
   let(:url) { 'http://example.com' }
 
   before do
+    allow(subject).to receive(:write_to_log)
     allow(Net::HTTP).to receive(:new).and_return(http)
     allow(Net::HTTP::Post).to receive(:new).and_return(request)
     allow(http).to receive(:request).with(request)
