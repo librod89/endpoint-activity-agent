@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post :files, to: 'files#create'
   patch :files, to: 'files#update'
+  delete :files, to: 'files#destroy'
 
   post :process, to: 'processes#start'
 end
