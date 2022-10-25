@@ -36,7 +36,7 @@ class FilesController < ApplicationController
     return unless path.present?
 
     write_to_log([
-      "File creation/modification/deletion",
+      'FilesController',
       start_time,
       path,
       params[:action],

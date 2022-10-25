@@ -19,7 +19,7 @@ class ProcessesController < ApplicationController
     return unless params[:path].present?
 
     write_to_log([
-      "Process start",
+      'ProcessesController',
       start_time,
       username[1],
       $PROGRAM_NAME,

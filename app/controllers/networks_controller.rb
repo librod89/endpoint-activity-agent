@@ -34,7 +34,7 @@ class NetworksController < ApplicationController
     return unless params[:url].present?
 
     write_to_log([
-      'Network connection',
+      'NetworksController',
       start_time,
       username[1],
       "#{uri.host}::#{uri.port}",
